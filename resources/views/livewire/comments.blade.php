@@ -7,7 +7,7 @@
         {{-- Form --}}
         <form class="mt-5">
             <div class="mb-3">
-              <input type="text" class="form-control" id="comment" placeholder="What's in your mind?" wire:model="newComment">
+              <input type="text" class="form-control" id="comment" placeholder="What's in your mind?" wire:model.lazy="newComment">
             </div>
 
         </form>
