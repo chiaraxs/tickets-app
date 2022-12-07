@@ -2,36 +2,42 @@
 
 namespace App\Http\Livewire;
 
-use Carbon\Carbon;
+use App\Models\Comment;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class Comments extends Component
 {
-    public $newComment;
 
-    public $comments = [
-        [
-            'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mauris urna, semper quis consequat quis, accumsan non tortor. Vestibulum accumsan diam in ullamcorper tristique. Nam sodales turpis ut tellus faucibus, id pulvinar est accumsan. Etiam lorem mauris, blandit in mollis dictum, rhoncus sit amet erat. Proin euismod a sem euismod volutpat. Donec libero ex, iaculis vitae scelerisque et, consectetur ut elit. Aliquam erat volutpat.',
-            'created_at' => '5 minutes ago',
-            'creator' => 'Chiara',
-        ]
-    ];
+    public $comments;
+
+    public $newComment;
+    
+    // Mount function to show all comments
+    public function mount(){
+
+       $initialComments = Comment::all();
+       $initialComments = Comment::orderBy('created_at', 'desc')->get();
+       $this->comments = $initialComments;
+
+    }
+
+    // Updated function
+    public function updated($field)
+    {
+        $this->validateOnly($field, ['newComment'=> 'required|max:200']);
+    }
+
 
     // AddComment function
     public function addComment(){
 
-        // Previene la pubblicazione di commenti vuoti al click sul button
-        if($this->newComment == '') {
-            return;
-        }
-        
-        // array_unshift ordina i nuovi commenti dall'alto verso il basso
-        array_unshift($this->comments, [
-            'body' => $this->newComment,
-            'created_at' => Carbon::now()->diffForHumans(),
-            'creator' => 'Yago',
-        ]);
+        $this->validate(['newComment'=> 'required|max:200']);
 
+        $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => 1]);
+        $this->comments->prepend($createdComment);
+        
         $this->newComment = ''; // refresh input text after submit button
     }
 

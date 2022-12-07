@@ -3,13 +3,17 @@
     {{-- Cointainer --}}
     <div class="container w-50 px-5">
         <h1 class="text-center mt-5">Comments</h1>
+
+        {{-- Alert validation rule --}}
+        <div class="alert">
+            @error('newComment') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
+        </div>
         
         {{-- Form --}}
-        <form class="mt-5">
+        <form class="">
             <div class="mb-3">
               <input type="text" class="form-control" id="comment" placeholder="What's in your mind?" wire:model.lazy="newComment">
             </div>
-
         </form>
         {{-- /Form --}}
 
@@ -27,11 +31,11 @@
                 <div class="card">
                     {{-- <img src="..." class="card-img-top" alt="..."> --}}
                     <div class="card-body lh-1">
-                        <p class="card-text text-muted fw-light">{{$comment['created_at']}} by <b>{{$comment['creator']}}</b></p>
-                        <p class="card-text">{{$comment['body']}}</p>
+                        <p class="card-text text-muted fw-light">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} by <b>{{$comment->creator->name}}</b></p>
+                        <p class="card-text">{{$comment->body}}</p>
                     </div>
                 </div>
-            </div>
+            </div> 
         @endforeach
         {{-- /ForEach cards comment --}}
 
