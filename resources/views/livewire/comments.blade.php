@@ -31,7 +31,13 @@
                 <div class="card">
                     {{-- <img src="..." class="card-img-top" alt="..."> --}}
                     <div class="card-body lh-1">
-                        <p class="card-text text-muted fw-light">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} by <b>{{$comment->creator->name}}</b></p>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text text-muted fw-light">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} by <b>{{$comment->creator->name}}</b></p>
+                            <i class="fas fa-times text-danger fw-bolder cursor-pointer" wire:click="removeComment({{$comment->id}})"></i>
+                        </div>
+                        
+                        
                         <p class="card-text">{{$comment->body}}</p>
                     </div>
                 </div>

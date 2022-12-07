@@ -41,6 +41,13 @@ class Comments extends Component
         $this->newComment = ''; // refresh input text after submit button
     }
 
+    // RemoveComment function
+    public function removeComment($commentId)
+    {
+       $comment = Comment::find($commentId);
+       $this->comments = $this->comments->except($commentId);
+    }
+
     public function render()
     {
         return view('livewire.comments');
