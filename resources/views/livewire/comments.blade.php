@@ -48,7 +48,7 @@
         @foreach ($comments as $comment)
             <div class="cards-box mt-5 pb-2">
                 <div class="card">
-                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                   
                     <div class="card-body lh-1">
 
                         <div class="d-flex justify-content-between">
@@ -56,8 +56,15 @@
                             <i class="fas fa-times text-danger fw-bolder cursor-pointer" wire:click="removeComment({{$comment->id}})"></i>
                         </div>
                         
-                        
-                        <p class="card-text">{{$comment->body}}</p>
+                        {{-- Image from storage --}}
+                        @if ($comment->image)
+                            <div class="d-flex justify-content-center">
+                                <img src="/storage/{{ $comment->image }}" width="200">  
+                            </div> 
+                        @endif
+                        {{-- /Image from storage --}}
+
+                        <p class="card-text text-center">{{$comment->body}}</p>
                     </div>
                 </div>
             </div> 
