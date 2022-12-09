@@ -77,7 +77,12 @@ class Comments extends Component
     public function removeComment($commentId)
     {
        $comment = Comment::find($commentId);
-       Storage::disk('public')->delete($comment->image);  // remove img
+       
+        // se l'img non è null ->  remove img
+        if(!is_null($comment->image)) {
+            Storage::delete($comment->image); 
+        }
+      
        $comment->delete();
 
        // Flash success messagge
