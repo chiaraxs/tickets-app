@@ -54,6 +54,14 @@
                 </div>
             </div> 
         @endforeach
+        
+            {{-- Pagination --}}
+            <div class="alert d-flex justify-content-center"">
+                {{ $comments->links() }}
+            </div>
+            {{-- /Pagination --}}
+
+        
         {{-- /ForEach cards comment --}}
 
     </div>
