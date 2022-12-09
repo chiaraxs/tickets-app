@@ -20,12 +20,22 @@ class Comments extends Component
 
     public $image;
 
+    public $ticketId;
 
-    // Upload image funcion
-    protected $listeners = ['fileUpload' => 'handleFileUpload'];
+
+    // Listeners
+    protected $listeners = [
+        'fileUpload' => 'handleFileUpload',    //Upload image funcion
+        'ticketSelected',  // ticket selected
+    ];
 
     public function handleFileUpload($imageData){
         $this->image = $imageData;
+    }
+
+    public function ticketSelected($ticketId)
+    {
+        $this->ticketId = $ticketId;
     }
 
     // Updated function
@@ -45,6 +55,7 @@ class Comments extends Component
         $createdComment = Comment::create([
             'body' => $this->newComment, 'user_id' => 1,
             'image' => $image,
+            'support_ticket_id' => $this->ticketId,
         ]);
         
         $this->newComment = ''; // refresh input text after submit button
@@ -92,7 +103,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => Comment::latest()->paginate(5),
+            'comments' => Comment::where('support_ticket_id', $this->ticketId)->latest()->paginate(5),
         ]);
     }
 }

@@ -1,8 +1,8 @@
-<div class="container-fluid d-flex justify-content-center">
+<div class="container-fluid d-flex justify-content-center border">
     
     {{-- Cointainer --}}
     <div class="container w-50 px-5">
-        <h1 class="text-center mt-5">Comments</h1>
+        <h3 class="text-center mt-5">Comments</h3>
 
         {{-- Alert validation rule --}}
         <div class="alert">

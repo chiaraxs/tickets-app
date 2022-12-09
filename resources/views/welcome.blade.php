@@ -21,7 +21,19 @@
   <body>
     
     {{-- Livewire component --}}
-    <livewire:comments />
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            <livewire:tickets />
+          </div>
+    
+          <div class="col-9">
+            <livewire:comments />
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
     
