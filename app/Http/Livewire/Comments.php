@@ -16,6 +16,16 @@ class Comments extends Component
 
     public $newComment;
 
+    public $image;
+
+    
+    // Upload image funcion
+    protected $listeners = ['fileUpload' => 'handleFileUpload'];
+
+    public function handleFileUpload($imageData){
+        $this->image = $imageData;
+    }
+
     // Updated function
     public function updated($field)
     {

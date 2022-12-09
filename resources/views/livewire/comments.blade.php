@@ -19,6 +19,14 @@
             @endif
         </div>
         {{-- /Alert success message --}}
+
+        {{-- Image section upload --}}
+        <section>
+            <img src="{{$image}}" width="200">
+            <input type="file" id="image" wire:change="$emit('fileChoosen')">
+        </section>
+        {{-- /Image section upload --}}
+
         
         {{-- Form --}}
         <form class="">
@@ -68,3 +76,21 @@
     {{-- /Cointainer --}}
    
 </div>
+
+{{-- Upload Image script --}}
+<script>
+    window.livewire.on('fileChoosen', () => {
+
+       let inputField = document.getElementById('image')
+       
+       let file = inputField.files[0]
+
+       let reader = new FileReader();
+
+        reader.onloadend = () => {
+            window.livewire.emit('fileUpload', reader.result);
+        }
+
+       reader.readAsDataURL(file);
+    })
+</script>

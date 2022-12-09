@@ -13,14 +13,16 @@
     
     {{-- Livewire styles --}}
     <livewire:styles />
-</head>
+    {{-- Livewire scripts --}}
+    <livewire:scripts />
+    
+  </head>
 
   <body>
     
     {{-- Livewire component --}}
     <livewire:comments />
 
+  </body>
     
-    {{-- Livewire scripts --}}
-    <livewire:scripts />
 </html>
