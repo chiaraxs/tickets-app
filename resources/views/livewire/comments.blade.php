@@ -8,6 +8,17 @@
         <div class="alert">
             @error('newComment') <span class="error text-danger fw-bold">{{ $message }}</span> @enderror
         </div>
+        {{-- /Alert validation rule --}}
+
+        {{-- Alert success message --}}
+        <div>
+            @if (session()->has('message'))
+                <div class="alert alert-success p-2">
+                    {{ session('message') }}
+                </div>
+            @endif
+        </div>
+        {{-- /Alert success message --}}
         
         {{-- Form --}}
         <form class="">
@@ -27,7 +38,7 @@
 
         {{-- ForEach cards comment --}}
         @foreach ($comments as $comment)
-            <div class="cards-box mt-5">
+            <div class="cards-box mt-5 pb-2">
                 <div class="card">
                     {{-- <img src="..." class="card-img-top" alt="..."> --}}
                     <div class="card-body lh-1">

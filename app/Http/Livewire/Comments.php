@@ -39,13 +39,21 @@ class Comments extends Component
         $this->comments->prepend($createdComment);
         
         $this->newComment = ''; // refresh input text after submit button
+
+        // Flash success messagge
+        session()->flash('message', 'Post successfully addeded. ');
     }
 
     // RemoveComment function
     public function removeComment($commentId)
     {
        $comment = Comment::find($commentId);
+       $comment->delete();
+       
        $this->comments = $this->comments->except($commentId);
+
+       // Flash success messagge
+       session()->flash('message', 'Post successfully deleted. ');
     }
 
     public function render()

@@ -17,7 +17,7 @@
 
   <body>
     
-    {{-- Livewire componente + props like vue --}}
+    {{-- Livewire component --}}
     <livewire:comments />
 
     
